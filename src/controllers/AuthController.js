@@ -34,6 +34,10 @@ class AuthController {
                 return res.status(401).json({ status: "error", message: "Invalid login credentials" });
             }
 
+            if (!user.isActive) {
+                return res.status(400).json({ status: "failure", message: "This account has been blocked!" });
+            }
+
             return res.status(200).json({
                 status: "success",
                 message: "Successfully logged in",
